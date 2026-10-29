@@ -1,6 +1,13 @@
 #!/usr/bin/python3
+import sys
 from models.engine.file_storage import FileStorage
-storage = FileStorage()
-assert hasattr(storage, "_FileStorage__file_path")
-assert isinstance(storage._FileStorage__file_path, str)
-print("OK")
+
+try:
+    storage = FileStorage()
+    if hasattr(storage, "_FileStorage__file_path") and isinstance(storage._FileStorage__file_path, str):
+        sys.stdout.write("OK\n")
+        sys.stdout.flush()
+    else:
+        sys.stderr.write("Failed\n")
+except Exception as e:
+    sys.stderr.write(str(e))
